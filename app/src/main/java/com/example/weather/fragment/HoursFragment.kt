@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.weather.R
 import com.example.weather.adapter.WeatherAdapter
 import com.example.weather.adapter.WeatherModel
 import com.example.weather.databinding.FragmentHoursBinding
