@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Prodject/Weather/app/src/main/res/layout/activity_main.xml" value="0.26358695652173914" />
+        <entry key="..\:/Prodject/Weather/app/src/main/res/layout/fragment_days.xml" value="0.26358695652173914" />
+        <entry key="..\:/Prodject/Weather/app/src/main/res/layout/fragment_hours.xml" value="0.26358695652173914" />
+        <entry key="..\:/Prodject/Weather/app/src/main/res/layout/fragment_main.xml" value="0.26358695652173914" />
+        <entry key="..\:/Prodject/Weather/app/src/main/res/layout/list_item.xml" value="0.26358695652173914" />
         <entry key="..\:/Users/checkmen_av/AndroidStudioProjects/Weather/app/src/main/res/layout/activity_main.xml" value="0.3489583333333333" />
         <entry key="..\:/Users/checkmen_av/AndroidStudioProjects/Weather/app/src/main/res/layout/fragment_days.xml" value="0.33489583333333334" />
         <entry key="..\:/Users/checkmen_av/AndroidStudioProjects/Weather/app/src/main/res/layout/fragment_hours.xml" value="0.3489583333333333" />
