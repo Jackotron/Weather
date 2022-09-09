@@ -1,7 +1,6 @@
 package com.example.weather.fragment
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -39,7 +38,7 @@ class HoursFragment : Fragment() {
 
     private fun initRcView() = with(binding) {
         rcView.layoutManager = LinearLayoutManager(activity)
-        adapter = WeatherAdapter()
+        adapter = WeatherAdapter(null)
         rcView.adapter = adapter
 
     }
@@ -53,7 +52,7 @@ class HoursFragment : Fragment() {
                 (hoursArray[i] as JSONObject).getString("time"),
                 (hoursArray[i] as JSONObject).getJSONObject("condition")
                     .getString("text"),
-                (hoursArray[i] as JSONObject).getString("temp_c"),
+                (hoursArray[i] as JSONObject).getString("temp_c").toFloat().toInt().toString(),
                 "",
                 "",
                 (hoursArray[i] as JSONObject).getJSONObject("condition")

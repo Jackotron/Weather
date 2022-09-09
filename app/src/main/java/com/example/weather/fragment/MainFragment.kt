@@ -65,13 +65,13 @@ class MainFragment : Fragment() {
 
     private fun updateCurrentCard() = with(binding) {
         model.liveDataCurrent.observe(viewLifecycleOwner) {
-            val maxMinTemp = "Макс.:${it.maxTemp.toDouble().toInt()}°, мин.:${it.minTemp.toDouble().toInt()}°"
-            val temperature = "${it.currentTemp.toDouble().toInt()}°"
-            tvData.text = "${it.time.substring(8,10)}-${it.time.substring(5,7)}-${it.time.substring(0,4)}  ${it.time.substring(11)}"
+            val maxMinTemp =
+                "Макс.:${it.maxTemp}°, мин.:${it.minTemp}°"
+            tvData.text = it.time
             tvCity.text = it.city
-            tvCurrentTemp.text = temperature
+            tvCurrentTemp.text = (it.currentTemp).ifEmpty { "${it.maxTemp}°  ${it.minTemp}°" }
             tvCondition.text = it.condition
-            tvMaxMin.text = maxMinTemp
+            tvMaxMin.text = if (it.currentTemp.isEmpty()) "" else maxMinTemp
             Picasso.get().load("https:" + it.imageUrl).into(imWeather)
         }
     }
@@ -89,9 +89,9 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun requestWeatherData(city: String) {
+    private fun requestWeatherData(City: String) {
         val url =
-            "https://api.weatherapi.com/v1/forecast.json?key=$API_KEY&q=$city&days=3&aqi=no&alerts=no"
+            "https://api.weatherapi.com/v1/forecast.json?key=$API_KEY&q=$City&days=3&aqi=no&alerts=no"
         val queue = Volley.newRequestQueue(context)
         val request = StringRequest(
             Request.Method.GET,
@@ -126,14 +126,15 @@ class MainFragment : Fragment() {
                 day.getJSONObject("day").getJSONObject("condition")
                     .getString("text"),
                 "",
-                day.getJSONObject("day").getString("maxtemp_c"),
-                day.getJSONObject("day").getString("mintemp_c"),
+                day.getJSONObject("day").getString("maxtemp_c").toFloat().toInt().toString(),
+                day.getJSONObject("day").getString("mintemp_c").toFloat().toInt().toString(),
                 day.getJSONObject("day").getJSONObject("condition")
                     .getString("icon"),
                 day.getJSONArray("hour").toString()
             )
             list.add(item)
         }
+        model.liveDataList.value = list
         return list
     }
 
@@ -143,7 +144,7 @@ class MainFragment : Fragment() {
             mainObject.getJSONObject("current").getString("last_updated"),
             mainObject.getJSONObject("current")
                 .getJSONObject("condition").getString("text"),
-            mainObject.getJSONObject("current").getString("temp_c"),
+            mainObject.getJSONObject("current").getString("temp_c").toFloat().toInt().toString(),
             weatherItem.maxTemp,
             weatherItem.minTemp,
             mainObject.getJSONObject("current")
